@@ -16,7 +16,9 @@
     ],
     "temperature": 0.7,
     "max_tokens": 3500,
-    "timeout": 120
+    "timeout": 180,
+    "connect_timeout": 30,
+    "read_timeout": 90
   },
   "title_settings": {
     "title_level": 6,
@@ -29,7 +31,9 @@
   },
   "processing_settings": {
     "concurrent_requests": 3,
-    "retry_attempts": 3,
-    "min_content_length": 1000
+    "retry_attempts": 5,
+    "min_content_length": 1000,
+    "base_retry_delay": 5,
+    "max_consecutive_failures": 3
   }
 }
