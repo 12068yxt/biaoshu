@@ -176,7 +176,7 @@ class PPTSVGGenerator:
             }
             
             payload = {
-                "model": "qwen-plus",
+                "model": "qwen-coder-plus",  # 改用coder模型
                 "input": {
                     "messages": [
                         {
@@ -186,9 +186,9 @@ class PPTSVGGenerator:
                     ]
                 },
                 "parameters": {
-                    "temperature": 0.7,
+                    "temperature": 0.3,  # 降低温度以获得更稳定的输出
                     "top_p": 0.8,
-                    "max_tokens": 2000
+                    "max_tokens": 2500  # 增加token限制
                 }
             }
             
@@ -235,13 +235,11 @@ class PPTSVGGenerator:
     async def generate_single_svg(self, chapter_file: Path, debug_mode: bool = False) -> bool:
         """生成单个章节的SVG"""
         try:
-            # 检查是否已完成
-            file_key = str(chapter_file.relative_to(Path("../chapter_1.2.1.3")))
-            if file_key in self.progress["completed"]:
-                logger.info(f"跳过已完成的文件: {file_key}")
-                return True
-            
             # 提取章节信息
+            title, chapter_id = self.extract_chapter_info(chapter_file.name)
+            logger.info(f"处理章节: {title}")
+            
+            # 读取内容
             title, chapter_id = self.extract_chapter_info(chapter_file.name)
             logger.info(f"处理章节: {title}")
             
@@ -292,9 +290,11 @@ class PPTSVGGenerator:
             
             logger.info(f"SVG已保存: {svg_path}")
             
-            # 更新进度
-            self.progress["completed"].append(file_key)
-            self.save_progress()
+            # 更新进度（不跳过文件）
+            file_key = str(chapter_file.relative_to(Path("../chapter_1.2.1.3")))
+            if file_key not in self.progress["completed"]:
+                self.progress["completed"].append(file_key)
+                self.save_progress()
             
             return True
             
