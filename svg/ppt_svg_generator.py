@@ -176,7 +176,7 @@ class PPTSVGGenerator:
             }
             
             payload = {
-                "model": "qwen-coder-plus",  # 改用coder模型
+                "model": "qwen-max",  # 使用最强的Qwen模型
                 "input": {
                     "messages": [
                         {
@@ -186,9 +186,10 @@ class PPTSVGGenerator:
                     ]
                 },
                 "parameters": {
-                    "temperature": 0.3,  # 降低温度以获得更稳定的输出
-                    "top_p": 0.8,
-                    "max_tokens": 2500  # 增加token限制
+                    "temperature": 0.1,  # 极低温度确保稳定输出
+                    "top_p": 0.9,
+                    "max_tokens": 3000,  # 增加token限制
+                    "repetition_penalty": 1.1  # 避免重复
                 }
             }
             
