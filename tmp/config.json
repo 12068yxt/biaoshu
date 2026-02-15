@@ -1,0 +1,44 @@
+{
+  "api_settings": {
+    "providers": [
+      {
+        "name": "aliyun",
+        "api_key_env": "ALIYUN_API_KEY",
+        "model": "qwen-plus",
+        "base_url": "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
+      },
+      {
+        "name": "openai",
+        "api_key_env": "OPENAI_API_KEY",
+        "model": "gpt-3.5-turbo",
+        "base_url": "https://api.openai.com/v1/chat/completions"
+      }
+    ],
+    "temperature": 0.7,
+    "max_tokens": 4000,
+    "timeout": 300,
+    "concurrent_limit": 3
+  },
+  "document_settings": {
+    "source_file": "text.md",
+    "supported_extensions": [
+      ".md",
+      ".txt"
+    ]
+  },
+  "content_settings": {
+    "target_word_count": {
+      "min": 3000,
+      "max": 4000
+    },
+    "writing_style": "technical_specification"
+  },
+  "title_settings": {
+    "title_level": 5,
+    "supported_levels": [
+      5,
+      6
+    ]
+  },
+  "sections_to_expand": []
+}

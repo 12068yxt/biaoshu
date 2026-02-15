@@ -1,0 +1,44 @@
+{
+  "prompts": {
+    "flowchart": {
+      "template": "请为以下技术内容创建一个清晰的流程图SVG：\n\n内容主题: {title}\n技术要点: {content}\n\n要求:\n1. 使用标准SVG格式，尺寸1920x1080\n2. 采用黑白线框风格，线条粗细2-3px\n3. 使用矩形(步骤)、菱形(判断)、圆形(开始/结束)等标准流程图形状\n4. 添加带箭头的连接线表示流程方向\n5. 在节点内添加简洁明了的文字标签(中文)\n6. 保持整体布局从上到下或从左到右的清晰流向\n7. 使用正交连线，避免交叉\n8. 返回纯SVG代码，无需解释或其他文字",
+      "diagram_types": ["流程图", "工作流", "算法流程", "处理步骤"],
+      "debug_template": "DEBUG模式 - 请分析以下技术内容应该用什么样的流程图来展示：\n\n内容主题: {title}\n技术要点: {content}\n\n请回答：\n1. 这个内容最适合哪种流程图类型？\n2. 应该包含哪些关键步骤或节点？\n3. 主要的判断条件是什么？\n4. 建议的布局方向？"
+    },
+    "architecture": {
+      "template": "请为以下技术架构创建架构图SVG：\n\n系统名称: {title}\n架构描述: {content}\n\n要求:\n1. 标准SVG格式，1920x1080尺寸\n2. 黑白线框风格，专业简洁\n3. 使用矩形表示系统组件/模块，圆角矩形表示外部系统\n4. 实线表示直接连接，虚线表示间接/可选连接\n5. 使用箭头表示数据流向或调用关系\n6. 层次化布局，重要组件放大显示\n7. 添加组件名称标签，字体清晰可读\n8. 保持整体平衡和对称美感\n9. 返回纯SVG代码",
+      "diagram_types": ["系统架构", "网络拓扑", "软件架构", "组件结构"],
+      "debug_template": "DEBUG模式 - 请分析以下技术架构的组成要素：\n\n系统名称: {title}\n架构描述: {content}\n\n请分析：\n1. 系统包含哪些主要组件或模块？\n2. 各组件之间的关系是什么？\n3. 数据流向如何？\n4. 建议采用什么布局结构？"
+    },
+    "data_flow": {
+      "template": "请创建数据流向图SVG：\n\n主题: {title}\n数据流描述: {content}\n\n要求:\n1. 标准SVG格式，1920x1080\n2. 黑白线框风格\n3. 使用圆形或椭圆表示数据源/终点\n4. 使用矩形表示处理节点\n5. 使用带箭头的直线表示数据流向\n6. 不同线型区分不同类型数据(如实线=主要数据，虚线=辅助数据)\n7. 添加数据标签和处理说明\n8. 从左到右或从上到下的清晰布局\n9. 返回纯SVG代码",
+      "diagram_types": ["数据流", "信息流", "处理流程", "数据管道"],
+      "debug_template": "DEBUG模式 - 请分析以下数据流的关键要素：\n\n主题: {title}\n数据流描述: {content}\n\n请分析：\n1. 数据从哪里来，到哪里去？\n2. 中间有哪些处理步骤？\n3. 有哪些不同类型的数据？\n4. 建议的数据流向布局？"
+    },
+    "network_topology": {
+      "template": "请创建网络拓扑图SVG：\n\n网络名称: {title}\n拓扑描述: {content}\n\n要求:\n1. 标准SVG格式，1920x1080\n2. 黑白线框风格\n3. 使用不同形状表示不同设备(服务器、路由器、交换机等)\n4. 连线表示网络连接\n5. 添加IP地址、端口等标识信息\n6. 层次化布局，核心设备居中\n7. 使用标签说明设备功能\n8. 返回纯SVG代码",
+      "diagram_types": ["网络拓扑", "网络架构", "通信结构"],
+      "debug_template": "DEBUG模式 - 请分析网络拓扑的关键要素：\n\n网络名称: {title}\n拓扑描述: {content}\n\n请分析：\n1. 网络中包含哪些类型的设备？\n2. 设备间的连接关系如何？\n3. 网络的层次结构是什么？\n4. 建议的布局方式？"
+    }
+  },
+  "default_style": {
+    "stroke_width": "2",
+    "stroke_color": "#000000",
+    "fill_color": "none",
+    "font_family": "Microsoft YaHei, SimHei, Arial, sans-serif",
+    "font_size": "16",
+    "background_color": "white"
+  },
+  "debug_settings": {
+    "enable_debug_output": true,
+    "save_intermediate_prompts": true,
+    "show_token_usage": true,
+    "log_api_responses": true
+  },
+  "generation_settings": {
+    "max_content_length": 1000,
+    "retry_attempts": 3,
+    "timeout_seconds": 120,
+    "batch_size": 5
+  }
+}
