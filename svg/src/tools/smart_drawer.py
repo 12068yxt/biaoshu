@@ -248,9 +248,25 @@ class SmartDrawer:
         # 确保输出目录存在
         os.makedirs(output_dir, exist_ok=True)
 
-        # 准备输出路径
-        safe_title = re.sub(r'[^\w\u4e00-\u9fff]', '_', section.title)[:30]
-        svg_filename = f"section_{section.index:03d}_{safe_title}.svg"
+        # 准备输出路径 - 使用层级路径生成有意义的文件名
+        # section.title 格式如: "1.1.1.1 模块划分原则"
+        # 提取序号作为前缀，清理特殊字符
+        
+        # 从标题中提取序号部分（如 "1.1.1.1"）
+        title_match = re.match(r'^(\d+(?:\.\d+)*)', section.title)
+        if title_match:
+            # 使用标题中的序号（将点替换为下划线）
+            serial_number = title_match.group(1).replace('.', '_')
+            # 提取标题文字部分（去掉序号）
+            title_text = re.sub(r'^\d+(?:\.\d+)*\s*', '', section.title)
+        else:
+            # 标题没有序号，使用索引
+            serial_number = f"{section.index:03d}"
+            title_text = section.title
+        
+        # 清理标题文字（保留中文、英文、数字、下划线）
+        safe_title = re.sub(r'[^\w\u4e00-\u9fff]', '_', title_text).strip('_')[:30]
+        svg_filename = f"{serial_number}_{safe_title}.svg"
         svg_path = os.path.join(output_dir, svg_filename)
 
         # 渲染提示词
