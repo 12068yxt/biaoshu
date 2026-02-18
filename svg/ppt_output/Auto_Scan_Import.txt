@@ -1,0 +1,79 @@
+' ============================================
+' SVG 自动扫描导入 - 无需硬编码文件名
+' ============================================
+
+Sub AutoScanImportSVG()
+    Const ppLayoutBlank = 12
+    Const msoFalse = 0
+    Const msoTrue = -1
+    
+    Dim projectPath As String
+    Dim svgFolderPath As String
+    Dim savePath As String
+    Dim svgFile As String
+    Dim slideCount As Long
+    
+    ' 输入路径
+    projectPath = InputBox("请输入 svg 文件夹的完整路径" & vbCrLf & _
+                          "例如: C:\Users\xxx\Desktop\svgs", _
+                          "选择文件夹", "")
+    
+    If projectPath = "" Then Exit Sub
+    If Right(projectPath, 1) = "\" Then projectPath = Left(projectPath, Len(projectPath) - 1)
+    
+    svgFolderPath = projectPath
+    
+    ' 检查路径
+    If Dir(svgFolderPath, vbDirectory) = "" Then
+        MsgBox "找不到文件夹: " & svgFolderPath, vbCritical
+        Exit Sub
+    End If
+    
+    ' 清除所有幻灯片
+    Do While ActivePresentation.Slides.Count > 0
+        ActivePresentation.Slides(1).Delete
+    Loop
+    
+    ' 自动扫描所有 SVG 文件
+    slideCount = 0
+    svgFile = Dir(svgFolderPath & "\*.svg")
+    
+    Do While svgFile <> ""
+        Dim fullPath As String
+        fullPath = svgFolderPath & "\" & svgFile
+        
+        ' 添加幻灯片并插入图片
+        slideCount = slideCount + 1
+        
+        With ActivePresentation.Slides.Add(slideCount, ppLayoutBlank)
+            On Error Resume Next
+            Dim pic As Object
+            Set pic = .Shapes.AddPicture(fullPath, msoFalse, msoTrue, 50, 50)
+            
+            If Err.Number = 0 Then
+                ' 调整大小并居中
+                If pic.Width > 650 Then
+                    pic.LockAspectRatio = msoTrue
+                    pic.Width = 650
+                End If
+                pic.Left = (720 - pic.Width) / 2
+                pic.Top = (540 - pic.Height) / 2
+            End If
+            Err.Clear
+            On Error GoTo 0
+        End With
+        
+        ' 下一个文件
+        svgFile = Dir
+    Loop
+    
+    ' 保存
+    If slideCount > 0 Then
+        savePath = projectPath & "\ppt_output\svg_imported.pptx"
+        ActivePresentation.SaveAs savePath
+        MsgBox "完成! 共插入 " & slideCount & " 个 SVG" & vbCrLf & _
+               "保存至: " & savePath, vbInformation
+    Else
+        MsgBox "未找到 SVG 文件", vbExclamation
+    End If
+End Sub
