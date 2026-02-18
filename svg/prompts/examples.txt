@@ -1,0 +1,158 @@
+### 示例1：流程图（模块划分原则）
+
+输入章节：
+- 标题：模块划分原则
+- 层级路径：第一章>系统概述>架构设计
+- 内容：系统按照业务领域进行模块划分，每个模块独立部署。核心模块包括：用户服务、订单服务、支付服务。模块间通过消息队列进行异步通信。
+
+输出SVG：
+```svg
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <title>模块划分原则</title>
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <!-- 标题栏 -->
+  <rect x="0" y="0" width="1280" height="70" fill="#1E5FC5"/>
+  <text x="640" y="44" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" font-weight="bold" fill="#FFFFFF">模块划分原则</text>
+  <text x="640" y="62" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#90B8F8">第一章 &gt; 系统概述 &gt; 架构设计</text>
+  <!-- 三个核心模块卡片 -->
+  <g transform="translate(120, 130)">
+    <rect width="280" height="140" rx="8" fill="#F0F4FA" stroke="#1E5FC5" stroke-width="2"/>
+    <rect width="280" height="40" rx="8" fill="#1E5FC5"/>
+    <rect x="0" y="32" width="280" height="8" fill="#1E5FC5"/>
+    <text x="140" y="26" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">用户服务</text>
+    <text x="140" y="80" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">身份认证</text>
+    <text x="140" y="105" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">权限管理</text>
+    <text x="140" y="130" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">用户信息</text>
+  </g>
+  <g transform="translate(500, 130)">
+    <rect width="280" height="140" rx="8" fill="#F0F4FA" stroke="#FF8C00" stroke-width="2"/>
+    <rect width="280" height="40" rx="8" fill="#FF8C00"/>
+    <rect x="0" y="32" width="280" height="8" fill="#FF8C00"/>
+    <text x="140" y="26" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">订单服务</text>
+    <text x="140" y="80" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">订单创建</text>
+    <text x="140" y="105" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">状态跟踪</text>
+    <text x="140" y="130" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">历史记录</text>
+  </g>
+  <g transform="translate(880, 130)">
+    <rect width="280" height="140" rx="8" fill="#F0F4FA" stroke="#27AE60" stroke-width="2"/>
+    <rect width="280" height="40" rx="8" fill="#27AE60"/>
+    <rect x="0" y="32" width="280" height="8" fill="#27AE60"/>
+    <text x="140" y="26" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">支付服务</text>
+    <text x="140" y="80" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">支付处理</text>
+    <text x="140" y="105" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">退款管理</text>
+    <text x="140" y="130" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">账单记录</text>
+  </g>
+  <!-- 消息队列通信层 -->
+  <rect x="80" y="340" width="1120" height="60" rx="8" fill="#1A2B4C" opacity="0.9"/>
+  <text x="640" y="376" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" fill="#FFFFFF">消息队列（异步通信层）</text>
+  <!-- 连接箭头 -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7F8C8D"/>
+    </marker>
+  </defs>
+  <line x1="260" y1="270" x2="260" y2="340" stroke="#7F8C8D" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="5,3"/>
+  <line x1="640" y1="270" x2="640" y2="340" stroke="#7F8C8D" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="5,3"/>
+  <line x1="1020" y1="270" x2="1020" y2="340" stroke="#7F8C8D" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="5,3"/>
+  <!-- 原则说明 -->
+  <rect x="80" y="440" width="1120" height="220" rx="8" fill="#F0F4FA"/>
+  <text x="640" y="472" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" fill="#1E5FC5">模块划分核心原则</text>
+  <circle cx="120" cy="505" r="6" fill="#1E5FC5"/>
+  <text x="140" y="510" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">按业务领域划分，每个模块独立部署</text>
+  <circle cx="120" cy="545" r="6" fill="#FF8C00"/>
+  <text x="140" y="550" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">核心模块：用户服务、订单服务、支付服务</text>
+  <circle cx="120" cy="585" r="6" fill="#27AE60"/>
+  <text x="140" y="590" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">模块间通过消息队列进行异步通信，降低耦合</text>
+  <circle cx="120" cy="625" r="6" fill="#00B4D8"/>
+  <text x="140" y="630" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">每个服务可独立扩展、独立发布、独立监控</text>
+</svg>
+```
+
+---
+
+### 示例2：对比表格（技术选型对比）
+
+输入章节：
+- 标题：后端技术栈对比
+- 层级路径：第一章>技术选型
+- 内容：后端采用Spring Boot框架，数据库使用MySQL和Redis。缓存层使用Redis集群，消息队列使用RabbitMQ。选型依据：成熟稳定、社区活跃、团队熟悉。
+
+输出SVG：
+```svg
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <title>后端技术栈对比</title>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <!-- 标题栏 -->
+  <rect x="0" y="0" width="1280" height="70" fill="#1E5FC5"/>
+  <text x="640" y="44" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" font-weight="bold" fill="#FFFFFF">后端技术栈对比</text>
+  <text x="640" y="62" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="13" fill="#90B8F8">第一章 &gt; 技术选型</text>
+  <!-- 表头 -->
+  <rect x="60" y="100" width="240" height="50" fill="#1A2B4C"/>
+  <rect x="300" y="100" width="240" height="50" fill="#1E5FC5"/>
+  <rect x="540" y="100" width="240" height="50" fill="#1E5FC5"/>
+  <rect x="780" y="100" width="240" height="50" fill="#1E5FC5"/>
+  <rect x="1020" y="100" width="200" height="50" fill="#1E5FC5"/>
+  <text x="180" y="132" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF">类别</text>
+  <text x="420" y="132" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF">技术选型</text>
+  <text x="660" y="132" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF">版本</text>
+  <text x="900" y="132" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF">选型理由</text>
+  <text x="1120" y="132" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF">成熟度</text>
+  <!-- 数据行1 -->
+  <rect x="60" y="150" width="240" height="50" fill="#F0F4FA"/>
+  <rect x="300" y="150" width="240" height="50" fill="#FFFFFF"/>
+  <rect x="540" y="150" width="240" height="50" fill="#F0F4FA"/>
+  <rect x="780" y="150" width="240" height="50" fill="#FFFFFF"/>
+  <rect x="1020" y="150" width="200" height="50" fill="#F0F4FA"/>
+  <text x="180" y="182" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">Web框架</text>
+  <text x="420" y="182" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1E5FC5" font-weight="bold">Spring Boot</text>
+  <text x="660" y="182" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">3.x</text>
+  <text x="900" y="182" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#1A2B4C">成熟稳定、团队熟悉</text>
+  <text x="1120" y="182" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#27AE60">★★★★★</text>
+  <!-- 数据行2 -->
+  <rect x="60" y="200" width="240" height="50" fill="#F0F4FA"/>
+  <rect x="300" y="200" width="240" height="50" fill="#FFFFFF"/>
+  <rect x="540" y="200" width="240" height="50" fill="#F0F4FA"/>
+  <rect x="780" y="200" width="240" height="50" fill="#FFFFFF"/>
+  <rect x="1020" y="200" width="200" height="50" fill="#F0F4FA"/>
+  <text x="180" y="232" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">关系型数据库</text>
+  <text x="420" y="232" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1E5FC5" font-weight="bold">MySQL</text>
+  <text x="660" y="232" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">8.0</text>
+  <text x="900" y="232" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#1A2B4C">事务支持、广泛使用</text>
+  <text x="1120" y="232" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#27AE60">★★★★★</text>
+  <!-- 数据行3 -->
+  <rect x="60" y="250" width="240" height="50" fill="#F0F4FA"/>
+  <rect x="300" y="250" width="240" height="50" fill="#FFFFFF"/>
+  <rect x="540" y="250" width="240" height="50" fill="#F0F4FA"/>
+  <rect x="780" y="250" width="240" height="50" fill="#FFFFFF"/>
+  <rect x="1020" y="250" width="200" height="50" fill="#F0F4FA"/>
+  <text x="180" y="282" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">缓存</text>
+  <text x="420" y="282" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#FF8C00" font-weight="bold">Redis</text>
+  <text x="660" y="282" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">7.x 集群</text>
+  <text x="900" y="282" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#1A2B4C">高性能、数据结构丰富</text>
+  <text x="1120" y="282" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#27AE60">★★★★★</text>
+  <!-- 数据行4 -->
+  <rect x="60" y="300" width="240" height="50" fill="#F0F4FA"/>
+  <rect x="300" y="300" width="240" height="50" fill="#FFFFFF"/>
+  <rect x="540" y="300" width="240" height="50" fill="#F0F4FA"/>
+  <rect x="780" y="300" width="240" height="50" fill="#FFFFFF"/>
+  <rect x="1020" y="300" width="200" height="50" fill="#F0F4FA"/>
+  <text x="180" y="332" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">消息队列</text>
+  <text x="420" y="332" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#27AE60" font-weight="bold">RabbitMQ</text>
+  <text x="660" y="332" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#1A2B4C">3.x</text>
+  <text x="900" y="332" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#1A2B4C">可靠消息、社区活跃</text>
+  <text x="1120" y="332" text-anchor="middle" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#27AE60">★★★★☆</text>
+  <!-- 边框线 -->
+  <rect x="60" y="100" width="1160" height="250" fill="none" stroke="#1E5FC5" stroke-width="1.5"/>
+  <line x1="60" y1="150" x2="1220" y2="150" stroke="#D0D8E8" stroke-width="1"/>
+  <line x1="60" y1="200" x2="1220" y2="200" stroke="#D0D8E8" stroke-width="1"/>
+  <line x1="60" y1="250" x2="1220" y2="250" stroke="#D0D8E8" stroke-width="1"/>
+  <line x1="60" y1="300" x2="1220" y2="300" stroke="#D0D8E8" stroke-width="1"/>
+  <line x1="300" y1="100" x2="300" y2="350" stroke="#D0D8E8" stroke-width="1"/>
+  <line x1="540" y1="100" x2="540" y2="350" stroke="#D0D8E8" stroke-width="1"/>
+  <line x1="780" y1="100" x2="780" y2="350" stroke="#D0D8E8" stroke-width="1"/>
+  <line x1="1020" y1="100" x2="1020" y2="350" stroke="#D0D8E8" stroke-width="1"/>
+</svg>
+```

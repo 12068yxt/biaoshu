@@ -1,0 +1,125 @@
+# =============================================================================
+# SVG工作流主配置文件
+# 所有可变参数集中管理，配置变更无需重启（热重载）
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# LLM后端配置（Rule 2：多模型后端兼容）
+# 密钥优先从环境变量读取，其次从此处配置（禁止代码硬编码）
+# -----------------------------------------------------------------------------
+llm:
+  # 后端类型：openrouter | dashscope | openai
+  backend: "dashscope"
+
+  # --- OpenRouter 配置 ---
+  openrouter:
+    base_url: "https://openrouter.ai/api/v1"
+    # 密钥从环境变量 OPENROUTER_API_KEY 读取（留空则使用环境变量）
+    api_key_env: "OPENROUTER_API_KEY"
+    model: "anthropic/claude-3.5-sonnet"
+    temperature: 0.3
+    max_tokens: 4096
+
+  # --- 阿里云百炼 / 通义千问 配置 ---
+  dashscope:
+    base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    # 密钥从环境变量 DASHSCOPE_API_KEY 读取
+    api_key_env: "DASHSCOPE_API_KEY"
+    model: "qwen-max"
+    temperature: 0.3
+    max_tokens: 4096
+
+  # --- 标准 OpenAI 配置 ---
+  openai:
+    base_url: "https://api.openai.com/v1"
+    api_key_env: "OPENAI_API_KEY"
+    model: "gpt-4o"
+    temperature: 0.3
+    max_tokens: 4096
+
+  # 通用重试配置（指数退避）
+  retry_times: 2          # 最大重试次数（不含首次，共3次调用）
+  retry_base_delay: 1.0   # 初始等待秒数，每次乘2
+
+# -----------------------------------------------------------------------------
+# 提示词文件路径配置（Rule 3：提示词文件化）
+# 所有路径相对于 svg_workflow.py 所在目录
+# -----------------------------------------------------------------------------
+prompts:
+  system_file: "prompts/system.txt"
+  user_file: "prompts/user.txt"
+  examples_file: "prompts/examples.txt"
+
+# -----------------------------------------------------------------------------
+# SVG视觉风格配置（Rule 1：配置外置）
+# 所有颜色、字体、尺寸均在此定义，提示词通过变量引用
+# -----------------------------------------------------------------------------
+style:
+  # 画布尺寸（PPT标准16:9）
+  canvas_width: 1280
+  canvas_height: 720
+
+  # 背景与文字
+  bg_color: "#FFFFFF"
+  text_color: "#1A2B4C"
+
+  # 字体族（PPT兼容安全字体）
+  font: "Microsoft YaHei, Arial, sans-serif"
+  font_code: "Consolas, Courier New, monospace"
+
+  # 调色板
+  colors:
+    primary: "#1E5FC5"       # 主色（深蓝）
+    secondary: "#FF8C00"     # 辅色（橙）
+    accent: "#00B4D8"        # 强调色（青）
+    success: "#27AE60"       # 成功/正向（绿）
+    warning: "#F39C12"       # 警告（黄橙）
+    danger: "#E74C3C"        # 危险/负向（红）
+    neutral: "#7F8C8D"       # 中性（灰）
+    bg_light: "#F0F4FA"      # 浅底（卡片背景）
+    bg_dark: "#1A2B4C"       # 深底（标题栏）
+
+  # 边框与圆角
+  border_radius: 8
+  stroke_width: 1.5
+
+# -----------------------------------------------------------------------------
+# 图表类型决策配置
+# LLM参考此列表选择最合适的图表类型
+# -----------------------------------------------------------------------------
+chart_types:
+  - type: "流程图"
+    keywords: ["流程", "步骤", "流水线", "pipeline", "stage", "阶段", "顺序"]
+    description: "用矩形+箭头表示顺序步骤"
+
+  - type: "架构图"
+    keywords: ["架构", "组件", "模块", "服务", "系统", "层次", "分层"]
+    description: "用分层矩形表示系统结构"
+
+  - type: "对比表格"
+    keywords: ["对比", "比较", "优缺点", "vs", "差异", "异同"]
+    description: "用表格呈现多维度对比"
+
+  - type: "概念关系图"
+    keywords: ["关系", "关联", "依赖", "影响", "连接", "网络"]
+    description: "用节点+连线表示概念关系"
+
+  - type: "时间轴"
+    keywords: ["历史", "演进", "版本", "时间线", "发展", "迭代"]
+    description: "水平或垂直时间轴展示演进"
+
+  - type: "分类列表"
+    keywords: ["分类", "类型", "种类", "特点", "特征", "属性"]
+    description: "层次化列表呈现分类信息"
+
+  - type: "数据图表"
+    keywords: ["数据", "性能", "指标", "统计", "百分比", "比例"]
+    description: "柱状图或饼图呈现量化数据"
+
+# -----------------------------------------------------------------------------
+# 输出路径配置
+# -----------------------------------------------------------------------------
+output:
+  svg_dir: "output/svgs"
+  report_file: "output/report.json"
+  mermaid_file: "output/workflow_graph.md"
