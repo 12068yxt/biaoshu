@@ -56,12 +56,10 @@ def check_continue(state: WorkflowState) -> str:
     current_idx = state["current_section_idx"]
     total = len(state["sections"])
 
-    # 递增索引（注意：这里修改状态，但 LangGraph 会处理状态更新）
-    next_idx = current_idx + 1
-
-    if next_idx < total:
+    # current_idx 已经在 draw_svg 节点递增
+    if current_idx < total:
         log_decision("check_continue", thread_id, "继续循环",
-                    f"进度 {next_idx + 1}/{total}")
+                    f"进度 {current_idx + 1}/{total}")
         return "prepare_draw"
     else:
         log_decision("check_continue", thread_id, "全部完成",

@@ -190,10 +190,10 @@ class SmartDrawer:
         Returns:
             备用 SVG 代码
         """
-        style = self.config_manager.get_style_config()
-        bg_color = style.get('bg_color', '#FFFFFF')
-        text_color = style.get('text_color', '#2C3E50')
-        primary_color = style.get('colors', {}).get('primary', '#4A90D9')
+        # 硬编码备用样式
+        bg_color = '#FFFFFF'
+        text_color = '#1A2B4C'
+        primary_color = '#1E5FC5'
 
         # 截断标题（避免过长）
         display_title = title[:50] + "..." if len(title) > 50 else title

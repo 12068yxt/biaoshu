@@ -104,15 +104,6 @@ class ConfigManager:
     # 配置获取
     # ------------------------------------------------------------------
 
-    def get_style_config(self) -> Dict[str, Any]:
-        """
-        获取 SVG 视觉风格配置
-
-        Returns:
-            样式配置字典，包含 bg_color / text_color / font / colors 等
-        """
-        return self.config_data.get("style", {})
-
     def get_output_config(self) -> Dict[str, Any]:
         """
         获取输出路径配置
@@ -214,14 +205,12 @@ class ConfigManager:
         **extra_vars: Any,
     ) -> Tuple[str, str]:
         """
-        渲染提示词模板，填充章节变量和风格变量
+        渲染提示词模板，填充章节变量
 
         变量清单：
         - title：章节标题
         - content：章节正文（完整传递，不截断）
         - hierarchy_path：层级路径
-        - bg_color / text_color / font：来自 style 配置
-        - primary / secondary / accent / bg_light 等：来自 style.colors 配置
         - **extra_vars：调用方传入的额外变量
 
         Args:
@@ -236,20 +225,12 @@ class ConfigManager:
         # 检查配置是否有变更（热重载）
         self.reload_if_changed()
 
-        style = self.get_style_config()
-        colors: Dict[str, str] = style.get("colors", {})
-
-        # 构建模板变量字典（扁平化 colors 子键，方便 {{ primary }} 等直接引用）
+        # 构建模板变量字典
         template_vars: Dict[str, Any] = {
             "title": title,
             "content": content,
             "hierarchy_path": hierarchy_path,
-            "bg_color": style.get("bg_color", "#FFFFFF"),
-            "text_color": style.get("text_color", "#1A2B4C"),
-            "font": style.get("font", "Microsoft YaHei, Arial, sans-serif"),
-            # 展开 colors 子键
-            **colors,
-            # 调用方额外变量（优先级最高，可覆盖上方）
+            # 调用方额外变量（优先级最高）
             **extra_vars,
         }
 

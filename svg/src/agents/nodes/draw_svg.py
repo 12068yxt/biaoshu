@@ -62,8 +62,11 @@ def draw_svg(state: WorkflowState) -> Dict[str, Any]:
             log_info("draw_svg", thread_id, f"失败（使用备用）: {result.error_message}")
             log_node_end("draw_svg", thread_id, success=False)
 
-        # 返回结果列表（LangGraph 会自动追加）
-        return {"svg_results": [result]}
+        # 返回结果列表（LangGraph 会自动追加）和递增的索引
+        return {
+            "svg_results": [result],
+            "current_section_idx": current_idx + 1
+        }
 
     except Exception as e:
         error_msg = str(e)
@@ -80,4 +83,7 @@ def draw_svg(state: WorkflowState) -> Dict[str, Any]:
             error_message=error_msg
         )
 
-        return {"svg_results": [error_result]}
+        return {
+            "svg_results": [error_result],
+            "current_section_idx": current_idx + 1
+        }
