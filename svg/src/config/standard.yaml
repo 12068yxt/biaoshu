@@ -9,7 +9,7 @@
 # -----------------------------------------------------------------------------
 llm:
   # 后端类型：openrouter | dashscope | openai
-  backend: "dashscope"
+  backend: "openrouter"
 
   # --- OpenRouter 配置 ---
   openrouter:
