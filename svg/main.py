@@ -8,6 +8,11 @@ LangGraph 文档拆分 + 智能绘图工作流
 用法:
     python main.py <docx文件路径>
     python main.py --sample  # 创建并运行示例文档
+
+环境变量:
+    OPENROUTER_API_KEY: OpenRouter API Key
+    DASHSCOPE_API_KEY: 阿里云百炼 API Key
+    OPENAI_API_KEY: OpenAI API Key
 """
 
 import os
@@ -16,6 +21,15 @@ from datetime import datetime
 
 # 添加 src 到路径
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+# 尝试加载 .env 文件
+try:
+    from dotenv import load_dotenv
+    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
+    if os.path.exists(env_path):
+        load_dotenv(env_path, override=True)
+except ImportError:
+    pass  # python-dotenv 未安装
 
 from src.agents import build_workflow, create_initial_state
 

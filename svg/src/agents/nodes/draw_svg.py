@@ -13,6 +13,7 @@ SVG 绘图节点
 from typing import Dict, Any, List
 
 from ...agents.state import WorkflowState, SVGResult
+from ...config import ConfigManager
 from ...tools import SmartDrawer
 from ...utils import register_node
 from ...utils.logger import log_node_start, log_node_end, log_info
@@ -42,8 +43,8 @@ def draw_svg(state: WorkflowState) -> Dict[str, Any]:
     log_info("draw_svg", thread_id, f"正在生成: {section.title}")
 
     try:
-        # 获取配置管理器
-        config_manager = state["config_manager"]
+        # 从 config_path 重新创建配置管理器（避免序列化问题）
+        config_manager = ConfigManager(state["config_path"])
 
         # 创建智能绘图器
         drawer = SmartDrawer(config_manager)

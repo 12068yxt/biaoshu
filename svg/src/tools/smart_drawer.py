@@ -50,12 +50,24 @@ class SmartDrawer:
         self.retry_times = self.llm_config.get('retry_times', 2)
 
         # 初始化 LLM
+        api_key = self.llm_config.get('api_key')
+        base_url = self.llm_config.get('base_url')
+        
+        # OpenRouter 需要额外的 headers
+        default_headers = None
+        if 'openrouter.ai' in (base_url or ''):
+            default_headers = {
+                "HTTP-Referer": "https://localhost",
+                "X-Title": "SVG Workflow"
+            }
+        
         self.llm = ChatOpenAI(
             model=self.llm_config.get('model', 'gpt-4o'),
             temperature=self.llm_config.get('temperature', 0.3),
             max_tokens=self.llm_config.get('max_tokens', 4000),
-            base_url=self.llm_config.get('base_url'),
-            api_key=self.llm_config.get('api_key'),
+            base_url=base_url,
+            api_key=api_key,
+            default_headers=default_headers,
         )
 
     def _call_llm(self, system_prompt: str, user_prompt: str) -> str:

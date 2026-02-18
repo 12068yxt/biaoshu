@@ -10,7 +10,7 @@ Rule 5: LangGraph 状态机原则
 import operator
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Annotated, List, Optional, TypedDict, Any
+from typing import Annotated, List, Optional, TypedDict
 
 
 # =============================================================================
@@ -104,7 +104,6 @@ class WorkflowState(TypedDict):
         report_path: JSON 报告保存路径
         workflow_success: 工作流整体是否成功
         error_message: 全局错误信息
-        config_manager: 配置管理器实例（可选，不会被序列化）
     """
     # 配置相关
     config_path: str
@@ -126,8 +125,6 @@ class WorkflowState(TypedDict):
     # 最终状态
     workflow_success: bool
     error_message: str
-    # 运行时对象（不会被 LangGraph 检查点序列化）
-    config_manager: Optional[Any]
 
 
 def create_initial_state(
@@ -162,5 +159,4 @@ def create_initial_state(
         "report_path": "output/report.json",
         "workflow_success": False,
         "error_message": "",
-        "config_manager": None,
     }

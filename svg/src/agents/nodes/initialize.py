@@ -51,8 +51,9 @@ def initialize(state: WorkflowState) -> Dict[str, Any]:
         log_info("initialize", thread_id, f"SVG目录: {svg_dir}")
         log_node_end("initialize", thread_id, success=True)
 
+        # 注意：不把 config_manager 存入 state（LangGraph 无法序列化）
+        # 在 draw_svg 节点中会根据 config_path 重新创建
         return {
-            "config_manager": config_manager,
             "output_dir": output_dir,
             "report_path": report_path,
         }
